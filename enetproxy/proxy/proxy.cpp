@@ -89,8 +89,7 @@ int main() {
     SetConsoleTitleA("POFProxy");
     SetConsoleCtrlHandler(exit_handler, true);//auto host
 #endif
-    printf("Discord: ProB1#0100\n");
-    printf("Enet Proxy By Ama Fixed Shadowban and added features by ProB1\n");
+    printf("Proxy Made By Askar\n");
 
     pofproxy();
     serverdata();
