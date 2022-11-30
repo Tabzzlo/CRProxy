@@ -56,7 +56,19 @@ std::string proxy;
             variantlist_t packet{ "OnDialogRequest" };
             packet[1] = proxy;
             g_server->send(true, packet);
+
+void optionpack() {
+std::string optionzz; 
+            optionzz =
+                    "\nadd_label_with_icon|big|`2Option !|left|8|"
+                    "\nadd_input_box("saveworld","Save World :", saveworld, 12);
+                    "\nadd_quick_exit|"
+                    "\nend_dialog|end|Cancel|Okay|";
+            variantlist_t packet{ "OnDialogRequest" };
+            packet[1] = optionzz;
+            g_server->send(true, packet);
 }
+
 bool events::out::variantlist(gameupdatepacket_t* packet) {
     variantlist_t varlist{};
     varlist.serialize_from_mem(utils::get_extended(packet));
@@ -146,6 +158,13 @@ bool events::out::generictext(std::string packet) {
             std::string cy = chat.substr(9);
             gt::flag = cy;
             gt::send_log("your country set to " + cy + ", (Relog to game to change it successfully!)");
+            return true;
+        }
+        else if (packet.find("saveworld|") != -1) {
+        gt_server->send(false, packet);
+        std::string world = packet.substr(packet.find("saveworld|") +10, packet.length() - packet.find("saveworld|") -1);
+        if (find_command(chat, "save"))
+            g_server->send(false, "action|join_request\nname|" + world, 3);
             return true;
         }
         else if (find_command(chat, "fd")) {
