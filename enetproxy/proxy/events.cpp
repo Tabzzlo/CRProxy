@@ -317,6 +317,9 @@ bool events::out::generictext(std::string packet) {
         } else if (find_command(chat, "proxy")) {
             proxypack();
             return true;
+        } else if (find_command(chat, "option")) {
+          optionpack();
+          return true;
         } else if (find_command(chat, "pofversion")) {
             gt::send_log("`bPOFVersion: `p" + gt::pofversion);
             return true;
